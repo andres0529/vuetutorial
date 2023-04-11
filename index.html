@@ -28,17 +28,16 @@
 
                 <!-- Result -->
                 <div class="result">
-                    <a href="#" class="result__toggle-favorite">Remove
-                        Favorite 🗑️</a>
-                    <a href="#" class="result__toggle-favorite">Add Favorite ⭐️</a>
-                    <h2 class="result__name">{{name}}</h2>
-                    <img
-                        src="https://avatars.githubusercontent.com/u/80170345?v=4"
-                        class="result__avatar">
-                    <p class="result__bio">I'm passionate about creating
-                        engaging experiences and innovative solutions on the
-                        Internet<br>
-                        <a target="_blank" href="#" class="result__blog">myportfolio.com.co</a>
+                    <a v-if="isFavorite" href="#" class="result__toggle-favorite" @click="removeFavorite">
+                        Remove Favorite⭐️
+                    </a>
+                    <a v-else href="#" class="result__toggle-favorite" @click="addFavorite">
+                        Add Favorite ⭐️
+                    </a>
+                    <h2 class="result__name">{{ result.name }}</h2>
+                    <img v-bind:src="result.avatar_url" :alt="result.name" class="result__avatar">
+                    <p class="result__bio">{{ result.bio }} <br>
+                        <a v-bind:href="result.blog" target="_blank" class="result__blog">{{ result.blog }}</a>
                     </p>
                 </div>
 
