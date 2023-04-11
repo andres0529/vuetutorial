@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,12 @@
         <div id="app">
             <!-- Favorites -->
             <div class="favorites">
+                <div class="favorite" v-for="favorite in allFavorites">
+                    <a :href="favorite.blog" target="_blank">
+                        <img :src="favorite.avatar_url" :alt="favorite.name"
+                            class="favorite__avatar">
+                    </a>
+                </div>
             </div>
 
             <!-- Content -->
@@ -27,21 +34,24 @@
                 </form>
 
                 <!-- Result -->
-                <div class="result">
-                    <a v-if="isFavorite" href="#" class="result__toggle-favorite" @click="removeFavorite">
-                        Remove Favorite⭐️
-                    </a>
-                    <a v-else href="#" class="result__toggle-favorite" @click="addFavorite">
-                        Add Favorite ⭐️
-                    </a>
+                <div class="result" v-if="result">
+                    <a v-if="isFavorite" href="#"
+                        class="result__toggle-favorite" @click="removeFavorite">Remove
+                        Favorite
+                        ⭐️</a>
+                    <a v-else href="#" class="result__toggle-favorite"
+                        @click="addFavorite">Add Favorite ⭐️</a>
                     <h2 class="result__name">{{ result.name }}</h2>
-                    <img v-bind:src="result.avatar_url" :alt="result.name" class="result__avatar">
+                    <img v-bind:src="result.avatar_url" :alt="result.name"
+                        class="result__avatar">
                     <p class="result__bio">{{ result.bio }} <br>
-                        <a v-bind:href="result.blog" target="_blank" class="result__blog">{{ result.blog }}</a>
+                        <a v-bind:href="result.blog" target="_blank"
+                            class="result__blog">{{ result.blog }}</a>
                     </p>
                 </div>
 
                 <!-- Error -->
+                <div class="result__error" v-if="error">{{ error }}</div>
             </article>
         </div>
         <script src="./script.js"></script>
