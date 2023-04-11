@@ -11,6 +11,21 @@ const app = Vue.createApp({
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    async doSearch() {
+      this.result = this.error = null;
+      try {
+        const response = await fetch(API + this.search);
+        if (!response.ok) throw new Error("User not found");
+        const data = await response.json();
+        this.result = data;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.search = null;
+      }
+    },
+
+  },
 });
 const mountedApp = app.mount("#app");
